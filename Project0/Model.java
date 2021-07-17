@@ -193,26 +193,63 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
-        // emptySpace 就有 move
+        //if there is emptySpace return true
         boolean boardstate = emptySpaceExists(b);
         boolean maxtile = maxTileExists(b);
         if (boardstate == true || maxtile ==true) {
             return true;
         } else {
-            // 没有空格，才要判断 LeftOrRight || UpOrDown 相邻 tile  value 一样
-            //testUpOrDown 过了,只看这一列向上有没有相同的 tile
-
-        int col;
-        int row;
-        Tile t = b.tile(col,row);
-        public void recursion( t, int x, int y ){
-            
-
+            //up
+            for (int col = 0 ; col < b.size(); col++){
+                for ( int row = 0; row <b.size(); row++){
+                    if(row == b.size()-1){
+                        break;
+                    }else{
+                        int rowup = row+1;
+                        Tile t = b.tile(col,row);
+                        Tile tup = b.tile(col,rowup);
+                        if(t.value() == tup.value()){
+                            return true;
+                        }
+                    }
+                }
+                //down
+                for( int row = 1; row < b.size(); row++){
+                    int rowdown = row-1;
+                    Tile t =b.tile(col,row);
+                    Tile tdown = b.tile(col,rowdown);
+                    if(t.value() == tdown.value()){
+                        return true;
+                    }
+                }
             }
-
+            //right
+            for (int row = 0 ; row < b.size(); row++) {
+                for (int col = 0; col < b.size(); col++) {
+                    if (col == b.size() - 1) {
+                        break;
+                    } else {
+                        int colright = col + 1;
+                        Tile t = b.tile(col, row);
+                        Tile tright = b.tile(colright, row);
+                        if (t.value() == tright.value()) {
+                            return true;
+                        }
+                    }
+                }
+                //left
+                for (int col = 1; col < b.size(); col++){
+                    int colleft = col-1;
+                    Tile t = b.tile(col,row);
+                    Tile tleft = b.tile(colleft,row);
+                    if (t.value() == tleft.value()){
+                        return true;
+                    }
+                }
             }
-            return false;
-    }
+        }
+        return false;
+        }
 
 
     @Override
