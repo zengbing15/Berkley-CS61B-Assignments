@@ -107,30 +107,44 @@ public class Model extends Observable {
      *    and the trailing tile does not.
      * */
     public boolean tilt(Side side) {
-        boolean changed;
-        changed = false;
-
+        boolean changed = false;
+        this.board.setViewingPerspective(Side.NORTH);
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
-        // example code: 无论按哪个button，iterate board 移动每个 tile 到最上面那行
-        for(int c = 0; c < board.size(); c += 1){
-            for (int r = 0; r < board.size(); r++){
-                Tile t = board.tile(c,r);
-                if(board.tile(c,r) != null){
-                    board.move(c,3,t);
-                    changed = true;
-                    score += 7;
+
+        if (atLeastOneMoveExists(this.board)) {
+            // NoMerge 只考虑 Up 方向,从第3行 row =2 开始遍历 NoMerge
+            int count = 0;
+            for (int col = 0; col < this.board.size(); col++) {
+                // UpNoMerge UpBasicMerge
+                for (int row = 0; row < this.board.size() - 1; row++) {
+                    int rowup = row + 1;
+                    Tile t = board.tile(col, row);
+                    Tile tup = board.tile(col, rowup);
+                    // UpNoMerge
+                    if (t != null && tup == null) {
+                        changed = true;
+                        this.board.move(col, rowup, t);
+                    } else {
+                        if (t != null && tup != null && t.value() != tup.value()) {
+                            return changed;
+                        } else {
+                            // UpBasicMerge
+                            if (t != null && tup != null && t.value() == tup.value()) {
+                                changed = true;
+                                this.board.move(col, rowup, t);
+                                score = score + t.value() * 2;
+                            }
+                        }
+                    }
                 }
             }
         }
 
-
-        checkGameOver();
-        if (changed) {
-            setChanged();
-        }
-        return changed;
+            checkGameOver();
+            //return changed;
+            return changed;
     }
 
     /** Checks if the game is over and sets the gameOver variable
