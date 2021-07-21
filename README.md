@@ -1,4 +1,4 @@
-# cs61b-assignments
+# CS61B Assignments
 The assignments in CS61B: https://sp21.datastructur.es/materials/guides/getting-started
 * HW0: https://sp19.datastructur.es/materials/hw/hw0/hw0.html#break-and-continue
 * Exercise1.2.3: https://joshhug.gitbooks.io/hug61b/content/chap1/chap12.html
@@ -6,7 +6,7 @@ The assignments in CS61B: https://sp21.datastructur.es/materials/guides/getting-
 * Recursive&Iterative: https://joshhug.gitbooks.io/hug61b/content/chap2/chap21.html
 * Nested Classes: https://joshhug.gitbooks.io/hug61b/content/chap2/chap22.html
 
-## CS61B 课程笔记
+## CS61B Course Notes
 
 * [2. Defining and Using Classes](https://github.com/zengbing15/cs61b-assignments/blob/master/HW0/2.%20Defining%20and%20Using%20Classes.md)
 * [Project_Spec](https://github.com/zengbing15/cs61b-assignments/blob/master/Project0/Project_Spec.md)
